@@ -1,0 +1,7 @@
+ui_url = "https://chitai-gorod.ru"
+api_url = "https://web-gate.chitai-gorod.ru/"
+access_token = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL3VzZXItcmlnaHQiLCJzdWIiOjIzMDY1MTk4LCJpYXQiOjE3NjgxNTUwODMsImV4cCI6MTc2ODE1ODY4MywidHlwZSI6MjAsImp0aSI6IjAxOWJhZTQxLTc0N2ItNzRlMy1hMDhjLTJhYzRhNjk1ZGM4ZCIsInJvbGVzIjoxMH0.mttYS8npvWBK7nSLSHJ89wzIz84iie6A6cxHjgP76a3NvHnIS6KLFPhPY8PQsPmhU_8JEhk4ttg6HEqtoUuAG85eAeDQl51tZFxBeiOSBEuzRdyAWFJKwJkL7NcptJOO4KC8IBC6N8HcSjZILUpJE_LKNIXQhgK7tZe8xQOUIL7hgk3ZhS8CYWORkV2rVkEaGY-XSLRy-rL61RUDTyMPtIpDSefdq6tBpiRO0Dxd3UQSK7sKAj7u65PoqukTBGbqfRLTnhvocjG9B3_El7mI2kL_hs8lP9zjJvX3d3ubHR4cRd0smgLr6YMeXu87cj0O3tN8NGuepDyfRLfM9oxuIA"
+my_headers = {
+    "Content-Type": "application/json",
+    "Authorization": access_token,
+}
