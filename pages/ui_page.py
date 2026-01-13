@@ -18,9 +18,13 @@ class UiPage:
 
     def _wait_for_elements(self, by, value, multiple=False, timeout=10):
         if multiple:
-            return WebDriverWait(self.driver, timeout).until(EC.visibility_of_all_elements_located((by, value)))
+            return WebDriverWait(self.driver, timeout).until(
+                EC.visibility_of_all_elements_located((by, value))
+            )
         else:
-            return WebDriverWait(self.driver, timeout).until(EC.visibility_of_element_located((by, value)))
+            return WebDriverWait(self.driver, timeout).until(
+                EC.visibility_of_element_located((by, value))
+            )
 
     def _wait_for_text_in_element(self, by, value, text, timeout=10):
         WebDriverWait(self.driver, timeout).until(
@@ -36,9 +40,15 @@ class UiPage:
         WebDriverWait(self.driver, 10).until(lambda driver: driver.title != "")
         return self.driver.title == expected_title
 
-    @allure.step("Поиск книги по фразе: {phrase}")
+    @allure.step("Поиск книги по фразе: phrase")
     def search_by_phrase(self, phrase: str):
-        search_input = self._wait_for_elements(By.CSS_SELECTOR, "input.header-search__input")
+        # Проверить текущий URL
+        print(f"Current URL: {self.driver.current_url}")
+
+        # Сделать скриншот для проверки
+        self.driver.save_screenshot("debug.png")
+
+        search_input = self._wait_for_elements(By.CSS_SELECTOR, "input[type='text']")
         search_input.send_keys(phrase)
         self.driver.find_element(By.CSS_SELECTOR, "button[type='submit']").click()
 
@@ -52,12 +62,16 @@ class UiPage:
 
     @allure.step("Получаем сообщение об отсутствии результатов")
     def check_empty_result(self):
-        element = self._wait_for_elements(By.CSS_SELECTOR, ".catalog-empty-result__header")
-        return element.text.replace('&nbsp;', ' ')
+        element = self._wait_for_elements(
+            By.CSS_SELECTOR, ".catalog-empty-result__header"
+        )
+        return element.text.replace("&nbsp;", " ")
 
     @allure.step("Добавление первой книги в корзину")
     def click_first_action_button(self):
-        buttons = self._wait_for_elements(By.CSS_SELECTOR, ".action-button__text", multiple=True)
+        buttons = self._wait_for_elements(
+            By.CSS_SELECTOR, ".action-button__text", multiple=True
+        )
         if buttons:
             buttons[0].click()
             allure.step("Кликнули на первый элемент с классом action-button__text")
@@ -74,7 +88,7 @@ class UiPage:
     def get_cart_item_count(self):
         element = self._wait_for_elements(By.CSS_SELECTOR, ".app-title__append")
         text = element.text
-        match = re.search(r'\d+', text)
+        match = re.search(r"\d+", text)
         if match:
             return int(match.group(0))
         return 0

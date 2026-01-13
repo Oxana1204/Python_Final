@@ -19,20 +19,16 @@ def browser():
 @allure.title("Проверка заголовка главной страницы")
 def test_check_main_page_title(browser):
     with allure.step("Заголовок главной страницы"):
-        assert browser.check_page_title(
-            "«Читай-город» – интернет-магазин книг")
+        assert browser.check_page_title("«Читай-город» – интернет-магазин книг")
 
 
 @allure.feature("Тестирование интернет-магазина")
 @allure.story("Позитивные тесты.UI")
 @allure.severity("blocker")
 @allure.title("Найти книгу по заголовку")
-@pytest.mark.parametrize("book_name", ["Три мушкетера",
-                                       "1984",
-                                       "Умная собачка Соня"])
+@pytest.mark.parametrize("book_name", ["Три мушкетера", "1984", "Умная собачка Соня"])
 def test_search_by_phrase(browser, book_name):
-    with allure.step(f"Поиск книг с названием"
-                     f" {book_name}"):
+    with allure.step(f"Поиск книг с названием" f" {book_name}"):
         browser.search_by_phrase(book_name)
 
     with allure.step(f"Книга с названием {book_name} найдена"):
@@ -43,12 +39,11 @@ def test_search_by_phrase(browser, book_name):
 @allure.story("Позитивные тесты.UI")
 @allure.severity("blocker")
 @allure.title("Найти книгу по автору")
-@pytest.mark.parametrize("author_name", ["Лев Толстой",
-                                         "Сергей Довлатов",
-                                         "Agatha Christie"])
+@pytest.mark.parametrize(
+    "author_name", ["Лев Толстой", "Сергей Довлатов", "Agatha Christie"]
+)
 def test_search_by_author(browser, author_name):
-    with allure.step(f"Поиск книг автора: "
-                     f" {author_name}"):
+    with allure.step(f"Поиск книг автора: " f" {author_name}"):
         browser.search_by_phrase(author_name)
 
     with allure.step(f"Книга с названием {author_name} есть в ответе"):
@@ -59,11 +54,9 @@ def test_search_by_author(browser, author_name):
 @allure.story("Позитивные тесты.UI")
 @allure.severity("blocker")
 @allure.title("Добавить книгу в корзину")
-@pytest.mark.parametrize("book_name",
-                         ["Умная собачка Соня",
-                          "Три мушкетера",
-                          "Дневник книготорговца"
-])
+@pytest.mark.parametrize(
+    "book_name", ["Умная собачка Соня", "Три мушкетера", "Дневник книготорговца"]
+)
 def test_add_to_cart(browser, book_name):
     with allure.step("Поиск книг для добавления"):
         browser.search_by_phrase(book_name)
